@@ -1,0 +1,10 @@
+{
+  "cli": "0.23.0",
+  "templates": "0.23.0",
+  "sdk": "0.23.0",
+  "sourceOverrides": false,
+  "imageVersion": "2026.10.2",
+  "customComponentVersion": "1.2.1",
+  "network": "host",
+  "package": "SynoPkgHomeAssistant"
+}
