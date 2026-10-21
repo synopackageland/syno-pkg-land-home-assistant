@@ -1,0 +1,46 @@
+schema: 2
+package: SynoPkgHomeAssistant
+version: 2026.10.2
+build: 1
+displayname: Home Assistant
+description: Home automation with DSM administrator sign-in and local mDNS discovery.
+maintainer: synopackageland
+os_min_ver: "7.2.1-69057"
+arches: [x86_64]
+entry: admin-only
+capabilities: {}
+compose:
+  sdk: 0.23.0
+  files: [compose.yaml, compose.image.yaml]
+  host_udp: [{port: 5353, purpose: mdns}]
+  startup_timeout_seconds: 600
+  services:
+    web:
+      network: host
+      listener: {env: HA_BIND, format: host}
+      storage_init:
+        directories: [{base: /var/tmp, path: home-assistant}, {base: /var/tmp, path: home-assistant/config}]
+        runtime:
+          environment:
+            OIDC_SECRET: {oidc_client: homeassistant}
+            BOOTSTRAP_PASSWORD: {secret: bootstrap}
+  web: {service: web, port: 8123, health: {path: /manifest.json, status: 200}}
+  network: {egress: internet}
+identity_gateway:
+  sdk: 0.23.0
+  mode: oidc
+  access: dsm-admins
+  listen: {https: 8125}
+  roles: {claim: groups, admin: admins, user: users}
+  oidc:
+    issuer_port: 8126
+    native_login: true
+    browser_redirect:
+      html_paths: [/auth/oidc/redirect, /auth/oidc/finish]
+      same_origin_referrer: true
+    clients:
+      - id: homeassistant
+        redirect_paths: [/auth/oidc/callback]
+        pkce: true
+        roles: {claim: groups, admin: admins, user: users}
+ui: {launch: new-page}

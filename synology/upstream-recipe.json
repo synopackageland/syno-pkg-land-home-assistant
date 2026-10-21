@@ -1,0 +1,6 @@
+{
+  "kind": "official-image",
+  "repository": "homeassistant/home-assistant",
+  "service": "web",
+  "imageTag": "tag"
+}
