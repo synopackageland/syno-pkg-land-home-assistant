@@ -19,3 +19,11 @@
 - DSM packaging in `synology/`: MIT; Copyright (c) 2026 synopackageland.
 
 The package does not modify upstream Home Assistant or hass-oidc-auth source.
+
+## Package icon attribution
+
+Official Home Assistant artwork from home-assistant/assets at `8d4090f492d60841a0db4b3b26585184b29333ba`, `logo/home-assistant-logo.zip!home-assistant-logomark-with-margins-color-on-light.png`.
+Source: https://raw.githubusercontent.com/home-assistant/assets/8d4090f492d60841a0db4b3b26585184b29333ba/logo/home-assistant-logo.zip
+Original SHA-256: `78a2f4e5dc994f57ec5cfaaf4d516868b144f8e1733a4c665c66093e7cbe5a22`.
+License: CC-BY-NC-SA-4.0; Open Home Foundation trademark. The original asset is preserved; only size conversion/rasterization is performed for DSM. Upstream names and trademarks remain with their respective owners; this community integration does not claim upstream endorsement.
+The logo is the property/trademark of the Open Home Foundation. Preserve the upstream logo guidelines and noncommercial terms in LICENSES/HomeAssistant-Logo-CC-BY-NC-SA-4.0.md and LICENSES/HomeAssistant-Logo-Guidelines.md; do not apply the Core Apache-2.0 code license to the logo.
