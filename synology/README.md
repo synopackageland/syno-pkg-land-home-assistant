@@ -86,3 +86,7 @@ upstream tag, preserves upstream files, pins the official image in
 `compose.image.yaml`, and checks/builds the package. Review and commit the result,
 repeat device acceptance, then apply the CI allowlist policy before publication.
 Upgrades are not certified by this first package release.
+
+## Official package icon
+
+The DSM package uses the official project artwork, preserved unchanged and only resized/rasterized to the required icon sizes. See [assets/icon-source.json](assets/icon-source.json) for the source revision and original SHA-256, and [NOTICE.md](NOTICE.md) for attribution and the applicable image license. The package ID remains `SynoPkgHomeAssistant` for upgrade continuity.

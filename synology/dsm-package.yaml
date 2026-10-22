@@ -1,8 +1,9 @@
 schema: 2
 package: SynoPkgHomeAssistant
 version: 2026.10.2
-build: 1
+build: 2
 displayname: Home Assistant
+icon: assets/icon.png
 description: Home automation with DSM administrator sign-in and local mDNS discovery.
 maintainer: synopackageland
 os_min_ver: "7.2.1-69057"
