@@ -1,5 +1,11 @@
 # Home Assistant for Synology DSM
 
+## SDK 0.26.0 rebuild
+
+Rebuild 2026.10.2-0003 with published SDK/App/CLI/templates 0.26.0, UI 0.14.4 and Go 1.26.10. Maintainer: Syno Package Land. Official images and application sources are unchanged.
+
+2026.10.2-0003 使用已發佈 SDK/App/CLI/templates 0.26.0、UI 0.14.4 與 Go 1.26.10 重建；維護者顯示為 Syno Package Land。 官方映像與上游程式維持原樣。
+
 Home Assistant 2026.10.2, packaged as `SynoPkgHomeAssistant` 2026.10.2-0001.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging

@@ -1,17 +1,17 @@
 schema: 2
 package: SynoPkgHomeAssistant
 version: 2026.10.2
-build: 2
+build: 3
 displayname: Home Assistant
 icon: assets/icon.png
 description: Connect smart home devices and automate everyday routines
-maintainer: synopackageland
+maintainer: Syno Package Land
 os_min_ver: "7.2.1-69057"
 arches: [x86_64]
 entry: admin-only
 capabilities: {}
 compose:
-  sdk: 0.24.0
+  sdk: 0.26.0
   files: [compose.yaml, compose.image.yaml]
   host_udp: [{port: 5353, purpose: mdns}]
   startup_timeout_seconds: 600
@@ -28,7 +28,7 @@ compose:
   web: {service: web, port: 8123, health: {path: /manifest.json, status: 200}}
   network: {egress: internet}
 identity_gateway:
-  sdk: 0.24.0
+  sdk: 0.26.0
   mode: oidc
   access: dsm-admins
   listen: {https: 8125}
