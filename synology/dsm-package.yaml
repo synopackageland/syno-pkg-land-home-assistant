@@ -4,7 +4,7 @@ version: 2026.10.2
 build: 2
 displayname: Home Assistant
 icon: assets/icon.png
-description: Home automation with DSM administrator sign-in and local mDNS discovery.
+description: Connect smart home devices and automate everyday routines
 maintainer: synopackageland
 os_min_ver: "7.2.1-69057"
 arches: [x86_64]
@@ -45,3 +45,7 @@ identity_gateway:
         pkce: true
         roles: {claim: groups, admin: admins, user: users}
 ui: {launch: new-page}
+i18n:
+  info:
+    zh-TW:
+      description: 整合智慧家庭裝置，將日常操作自動化
