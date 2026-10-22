@@ -1,10 +1,13 @@
 {
-  "cli": "0.23.0",
-  "templates": "0.23.0",
-  "sdk": "0.23.0",
+  "cli": "0.24.0",
+  "templates": "0.24.0",
+  "sdk": "0.24.0",
   "sourceOverrides": false,
   "imageVersion": "2026.10.2",
   "customComponentVersion": "1.2.1",
   "network": "host",
-  "package": "SynoPkgHomeAssistant"
+  "package": "SynoPkgHomeAssistant",
+  "app": "0.24.0",
+  "executorTag": "executor/v0.24.0",
+  "goToolchain": "go1.26.10"
 }
