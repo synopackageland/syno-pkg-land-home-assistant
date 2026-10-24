@@ -14,7 +14,6 @@ compose:
   sdk: 0.26.0
   files: [compose.yaml, compose.image.yaml]
   host_udp: [{port: 5353, purpose: mdns}]
-  startup_timeout_seconds: 600
   services:
     web:
       network: host
