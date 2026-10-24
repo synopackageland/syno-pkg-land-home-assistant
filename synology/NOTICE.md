@@ -14,7 +14,7 @@
   License: `LICENSES/hass-oidc-auth-MIT.txt`. Its manifest declares aiofiles,
   Jinja2 and joserfc, which Home Assistant installs using its normal dependency
   mechanism; their upstream licenses apply. They are not bundled in the SPK.
-- Synopkgland SDK/App, CLI and templates 0.23.0: MIT; synopkgland contributors.
+- Synopkgland SDK/App, CLI and templates 0.28.0: MIT; synopkgland contributors.
   Generated SPK notices include the SDK and runtime dependencies.
 - DSM packaging in `synology/`: MIT; Copyright (c) 2026 synopackageland.
 
