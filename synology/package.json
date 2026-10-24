@@ -9,7 +9,7 @@
     "build": "synopkgland build --arch x86_64 --json"
   },
   "devDependencies": {
-    "@synopackageland/cli": "0.28.0",
-    "@synopackageland/templates": "0.28.0"
+    "@synopackageland/cli": "0.30.0",
+    "@synopackageland/templates": "0.30.0"
   }
 }

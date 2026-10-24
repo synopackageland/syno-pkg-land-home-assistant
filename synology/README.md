@@ -1,18 +1,12 @@
 # Home Assistant for Synology DSM
 
-## SDK 0.28.0 rebuild
+## 2026.10.2-0006
 
-Rebuild 2026.10.2-0004 with published SDK/App/CLI/templates 0.28.0 (executor/v0.27.0), UI 0.14.4 and Go 1.26.10, with the SDK's slow-NAS startup defaults (generous health/readiness timing and a Starting status in the UI). Maintainer: Syno Package Land. Official images and application sources are unchanged. Not tested on a NAS.
+Improve opening the App from the DSM menu and external access settings. Built with SDK/App 0.30.2 and CLI/templates 0.30.0. No NAS testing was performed for this toolchain rebuild.
 
-2026.10.2-0004 使用已發佈 SDK/App/CLI/templates 0.28.0（executor/v0.27.0）、UI 0.14.4 與 Go 1.26.10 重建，並採用 SDK 針對慢速 NAS 的啟動預設值（較寬鬆的健康檢查／就緒時間，以及 UI 的「啟動中」狀態）；維護者顯示為 Syno Package Land。 官方映像與上游程式維持原樣。尚未在 NAS 上測試。
+改善從 DSM 選單開啟 App 與外網存取設定；使用 SDK/App 0.30.2 和 CLI/templates 0.30.0 重建
 
-## SDK 0.26.0 rebuild
-
-Rebuild 2026.10.2-0003 with published SDK/App/CLI/templates 0.26.0, UI 0.14.4 and Go 1.26.10. Maintainer: Syno Package Land. Official images and application sources are unchanged.
-
-2026.10.2-0003 使用已發佈 SDK/App/CLI/templates 0.26.0、UI 0.14.4 與 Go 1.26.10 重建；維護者顯示為 Syno Package Land。 官方映像與上游程式維持原樣。
-
-Home Assistant 2026.10.2, packaged as `SynoPkgHomeAssistant` 2026.10.2-0001.
+Home Assistant 2026.10.2, packaged as `SynoPkgHomeAssistant` 2026.10.2-0006.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging
 lives in this directory. The official Docker Hub image is pinned by version and its multi-platform index SHA-256. The x86_64 manifest matches the official GHCR image byte for byte.
@@ -72,9 +66,8 @@ user's NAS filesystem permissions. This release enables no ctl/AI-control endpoi
 
 ## Build and review
 
-Use Node 22.12+ and Go 1.26.9, plus authorised access to the SDK Go module.
-Never put access tokens in this repository. SDK/App, CLI and templates are pinned
-to published 0.28.0; source overrides are not used for release builds.
+Use Node 22.12+ and Go 1.26.10, plus authorised access to the SDK Go module.
+Never put access tokens in this repository. SDK/App are pinned to published 0.30.2 and CLI/templates to 0.30.0; source overrides are not used for release builds.
 
 ```sh
 cd synology
