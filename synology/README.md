@@ -1,5 +1,9 @@
 # Home Assistant for Synology DSM
 
+## SDK 0.29.1 rebuild
+
+Rebuild 2026.10.2-0005 with SDK/App 0.29.1 and CLI/templates 0.29.0, retaining executor/v0.27.0. Upstream images and App configuration are unchanged. No NAS testing was performed for this rebuild.
+
 ## SDK 0.28.0 rebuild
 
 Rebuild 2026.10.2-0004 with published SDK/App/CLI/templates 0.28.0 (executor/v0.27.0), UI 0.14.4 and Go 1.26.10, with the SDK's slow-NAS startup defaults (generous health/readiness timing and a Starting status in the UI). Maintainer: Syno Package Land. Official images and application sources are unchanged. Not tested on a NAS.
