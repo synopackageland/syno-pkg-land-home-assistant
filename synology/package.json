@@ -4,9 +4,10 @@
   "type": "module",
   "scripts": {
     "render": "python3 scripts/render-compose.py",
-    "test": "python3 -m unittest discover -s tests",
+    "test": "python3 -m unittest discover -s tests && npm run test:entry",
     "check": "synopkgland check --json",
-    "build": "synopkgland build --arch x86_64 --json"
+    "build": "synopkgland build --arch x86_64 --json",
+    "test:entry": "cd tests/entry && go test -count=1 ./..."
   },
   "devDependencies": {
     "@synopackageland/cli": "0.34.0",

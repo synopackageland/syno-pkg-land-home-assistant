@@ -1,20 +1,36 @@
 # Home Assistant for Synology DSM
 
+## Current package
 
-## 2026.10.2-0009: SDK entry-gate migration
+Version **2026.10.2-0010** uses published SDK/App/templates **0.32.0**,
+CLI **0.34.0** and executor **v0.32.0**. Protected executors require
+administrator approval after upgrading. Device and mobile-client acceptance
+are separate from the offline package gates.
 
-Built with SDK/App/templates 0.32.0, CLI 0.34.0 and executor v0.32.0.
-Every request retains the DSM entry gate. No upstream-authenticated path exceptions are enabled in this build.
-Protected executor payloads changed: administrator approval is required again after upgrading.
-No NAS installation or device acceptance was performed for this rebuild.
+## Mobile and native clients
 
-## 2026.10.2-0006
+`identity_gateway.upstream_auth_paths` is exactly:
 
-Improve opening the App from the DSM menu and external access settings. Built with SDK/App 0.30.2 and CLI/templates 0.30.0. No NAS testing was performed for this toolchain rebuild.
+```text
+/api
+/auth/token
+/auth/revoke
+```
 
-改善從 DSM 選單開啟 App 與外網存取設定；使用 SDK/App 0.30.2 和 CLI/templates 0.30.0 重建
+These fixed prefixes are case-sensitive and match complete path segments.
+They bypass DSM admission and keep upstream authentication and authorization.
+All other paths, including browser entry, retain the existing DSM gate.
 
-Home Assistant 2026.10.2, packaged as `SynoPkgHomeAssistant` 2026.10.2-0006.
+Clients with existing Home Assistant credentials can use `/api` (including
+REST, `/api/websocket` and webhooks), `/auth/token` and `/auth/revoke` through the
+gateway HTTPS origin. Home Assistant validates access/refresh tokens; webhook
+endpoints retain their upstream secret and authorization rules.
+Manage and revoke native tokens in Home Assistant; DSM logout does not revoke
+them. Browser UI and interactive OIDC entry remain DSM-gated. `/auth/providers`
+and `/auth/login_flow` are not exceptions. Companion first-login/onboarding and
+end-to-end native-client operation remain unverified.
+
+Home Assistant 2026.10.2, packaged as `SynoPkgHomeAssistant` 2026.10.2-0010.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging
 lives in this directory. The official Docker Hub image is pinned by version and its multi-platform index SHA-256. The x86_64 manifest matches the official GHCR image byte for byte.
@@ -75,7 +91,7 @@ user's NAS filesystem permissions. This release enables no ctl/AI-control endpoi
 ## Build and review
 
 Use Node 22.12+ and Go 1.26.10, plus authorised access to the SDK Go module.
-Never put access tokens in this repository. SDK/App are pinned to published 0.30.2 and CLI/templates to 0.30.0; source overrides are not used for release builds.
+Never put access tokens in this repository. SDK/App/templates are pinned to published 0.32.0 and CLI to 0.34.0; source overrides are not used for release builds.
 
 ```sh
 cd synology
