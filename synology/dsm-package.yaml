@@ -1,7 +1,7 @@
 schema: 2
 package: SynoPkgHomeAssistant
 version: 2026.10.2
-build: 10
+build: 11
 displayname: Home Assistant
 icon: assets/icon.png
 description: Connect smart home devices and automate everyday routines

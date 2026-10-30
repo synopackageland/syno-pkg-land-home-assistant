@@ -2,7 +2,7 @@
 
 ## Current package
 
-Version **2026.10.2-0010** uses published SDK/App/templates **0.32.0**,
+Version **2026.10.2-0011** uses published SDK/App/templates **0.32.0**,
 CLI **0.34.0** and executor **v0.32.0**. Protected executors require
 administrator approval after upgrading. Device and mobile-client acceptance
 are separate from the offline package gates.
@@ -30,7 +30,7 @@ them. Browser UI and interactive OIDC entry remain DSM-gated. `/auth/providers`
 and `/auth/login_flow` are not exceptions. Companion first-login/onboarding and
 end-to-end native-client operation remain unverified.
 
-Home Assistant 2026.10.2, packaged as `SynoPkgHomeAssistant` 2026.10.2-0010.
+Home Assistant 2026.10.2, packaged as `SynoPkgHomeAssistant` 2026.10.2-0011.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging
 lives in this directory. The official Docker Hub image is pinned by version and its multi-platform index SHA-256. The x86_64 manifest matches the official GHCR image byte for byte.
@@ -68,9 +68,21 @@ bootstrap owner. Its credential is never delivered to a browser; the temporary
 bootstrap refresh token is deleted after HTTP configuration is confirmed. DSM
 OIDC administrators are not that bootstrap owner. Upstream owner-only operations
 are consequently unavailable through the DSM login. Keep the OIDC integration and
-loopback-only HTTP configuration in place. First-run country/location setup remains yours to configure. Home Assistant may
-show its country and HTTP YAML migration repair prompts; the adapter verifies
-the promoted native HTTP settings rather than relying on migrated YAML.
+loopback-only HTTP configuration in place. On first onboarding, the adapter uses
+Home Assistant's native location detection and saves country, time zone, units
+and available location/currency defaults through its core configuration API.
+These are IP-based suggestions, not DSM regional settings; VPNs and proxies may
+affect them. Review them in **Settings > System > General**. If detection is
+unavailable, startup continues and the log requests manual setup; the country
+repair remains until a country is set. Completed onboarding is not reconfigured
+on subsequent starts.
+
+HTTP YAML is used only for the private bootstrap listener. Before the serving
+restart, the adapter removes that temporary block, leaving the native HTTP
+store responsible for loopback binding, forwarded headers and the trusted
+loopback proxy. The serving start clears the HTTP YAML migration repair.
+Existing installations that already completed bootstrap are not migrated by
+this fresh-install fix.
 
 Ports 8123/8124 are reserved for
 loopback runtime/bootstrap, 8125 for gateway HTTPS, and 8126 for the OIDC issuer.
