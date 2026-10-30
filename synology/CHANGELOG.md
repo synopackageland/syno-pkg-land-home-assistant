@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026.10.4-0002: SDK 0.38.2 rebuild
+
+Built with SDK/App 0.38.2, templates 0.35.5, CLI 0.41.9 and executor v0.38.2;
+Home Assistant 2026.10.4 and its official image are unchanged.
+
+- The install wizard selects the gateway HTTPS and OIDC issuer ports
+  (defaults 8125 and 8126); the adapter follows the selected issuer port.
+- Add the app-open smoke (`npm run e2e:smoke`) for administrator, normal-user
+  denial and signed-out access.
+
 ## 2026.10.2-0011: Fresh-install Repairs
 
 - Save native country, time zone and unit suggestions during first onboarding;

@@ -68,6 +68,20 @@ class BootstrapDefaults(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(conf.stat().st_mode & 0o777, 0o600)
             self.assertEqual(store.read_bytes(), stored)
 
+    def test_retained_discovery_url_follows_selected_issuer_port(self) -> None:
+        url = 'http://127.0.0.1:28126/.well-known/openid-configuration'
+        with TemporaryDirectory() as directory:
+            conf = Path(directory) / 'configuration.yaml'
+            retained = {'automation': [{'alias': 'Keep me'}]}
+            conf.write_text(json.dumps({**retained, 'auth_oidc': {
+                'client_id': 'homeassistant',
+                'discovery_url': 'http://127.0.0.1:8126/.well-known/openid-configuration'}}))
+            conf.chmod(0o600)
+            adapter_functions(discovery_url=url)['sync_discovery_url'](conf)
+            self.assertEqual(json.loads(conf.read_text()), {**retained, 'auth_oidc': {
+                'client_id': 'homeassistant', 'discovery_url': url}})
+            self.assertEqual(conf.stat().st_mode & 0o777, 0o600)
+
     def test_private_http_refuses_incompatible_native_policy(self) -> None:
         private = {'server_host': ['127.0.0.1'], 'server_port': 8123,
                    'use_x_forwarded_for': True, 'trusted_proxies': ['127.0.0.1/32']}
@@ -91,13 +105,19 @@ class BootstrapBoundary(unittest.TestCase):
     def test_rejects_wildcard_before_touching_data(self):
         self.assert_refused(1000, '0.0.0.0')
 
-    def assert_refused(self, uid, bind):
+    def test_rejects_invalid_issuer_port_before_touching_data(self):
+        for port in ('', '08126', '80', '65536', '8126 '):
+            with self.subTest(port=port):
+                self.assert_refused(1000, '127.0.0.1', port, 'Invalid OIDC issuer port')
+
+    def assert_refused(self, uid, bind, port='8126', message='requires package UID and SDK loopback listener'):
         source = (ROOT / 'container/bootstrap.py').read_text()
-        program = f'import os; os.getuid = lambda: {uid}; os.environ["HA_BIND"] = {bind!r}; exec({source!r})'
+        program = (f'import os; os.getuid = lambda: {uid}; os.environ["HA_BIND"] = {bind!r}; '
+                   f'os.environ["OIDC_PORT"] = {port!r}; exec({source!r})')
         result = subprocess.run([sys.executable, '-c', program], capture_output=True, text=True, timeout=5)
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(result.stdout, '')
-        self.assertIn('requires package UID and SDK loopback listener', result.stderr)
+        self.assertIn(message, result.stderr)
 
     def test_rendered_adapter_is_current_and_compiles(self):
         import json

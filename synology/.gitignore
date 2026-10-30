@@ -3,3 +3,5 @@ dist/
 .build/
 evidence/
 __pycache__/
+.e2e/
+.env

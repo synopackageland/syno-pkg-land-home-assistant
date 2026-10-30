@@ -1,7 +1,7 @@
 schema: 2
 package: SynoPkgHomeAssistant
 version: 2026.10.4
-build: 1
+build: 2
 displayname: Home Assistant
 icon: assets/icon.png
 description: Connect smart home devices and automate everyday routines
@@ -14,8 +14,10 @@ os_min_ver: "7.2.1-69057"
 arches: [x86_64]
 entry: admin-only
 capabilities: {}
+install:
+  ports: true
 compose:
-  sdk: 0.32.0
+  sdk: 0.38.2
   files: [compose.yaml, compose.image.yaml]
   host_udp: [{port: 5353, purpose: mdns}]
   services:
@@ -26,13 +28,14 @@ compose:
         directories: [{base: /var/tmp, path: home-assistant}, {base: /var/tmp, path: home-assistant/config}]
         runtime:
           environment:
+            OIDC_PORT: {port: oidc_issuer}
             OIDC_SECRET: {oidc_client: homeassistant}
             BOOTSTRAP_PASSWORD: {secret: bootstrap}
   web: {service: web, port: 8123, health: {path: /manifest.json, status: 200}}
   network: {egress: internet}
 identity_gateway:
   upstream_auth_paths: [/api, /auth/token, /auth/revoke]
-  sdk: 0.32.0
+  sdk: 0.38.2
   mode: oidc
   access: dsm-admins
   listen: {https: 8125}

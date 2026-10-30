@@ -2,8 +2,8 @@
 
 ## Current package
 
-Version **2026.10.2-0011** uses published SDK/App/templates **0.32.0**,
-CLI **0.34.0** and executor **v0.32.0**. Protected executors require
+Version **2026.10.4-0002** uses published SDK/App **0.38.2**, templates
+**0.35.5**, CLI **0.41.9** and executor **v0.38.2**. Protected executors require
 administrator approval after upgrading. Device and mobile-client acceptance
 are separate from the offline package gates.
 
@@ -30,7 +30,7 @@ them. Browser UI and interactive OIDC entry remain DSM-gated. `/auth/providers`
 and `/auth/login_flow` are not exceptions. Companion first-login/onboarding and
 end-to-end native-client operation remain unverified.
 
-Home Assistant 2026.10.2, packaged as `SynoPkgHomeAssistant` 2026.10.2-0011.
+Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0002.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging
 lives in this directory. The official Docker Hub image is pinned by version and its multi-platform index SHA-256. The x86_64 manifest matches the official GHCR image byte for byte.
@@ -84,8 +84,10 @@ loopback proxy. The serving start clears the HTTP YAML migration repair.
 Existing installations that already completed bootstrap are not migrated by
 this fresh-install fix.
 
-Ports 8123/8124 are reserved for
-loopback runtime/bootstrap, 8125 for gateway HTTPS, and 8126 for the OIDC issuer.
+Ports 8123/8124 are reserved for loopback runtime/bootstrap. The install wizard
+selects the gateway HTTPS port (default 8125) and the OIDC issuer port (default
+8126); the adapter reads the selected issuer port at every start. Upgrades keep
+the selected ports; reinstall to change them.
 
 ## Data and removal
 
@@ -103,7 +105,7 @@ user's NAS filesystem permissions. This release enables no ctl/AI-control endpoi
 ## Build and review
 
 Use Node 22.12+ and Go 1.26.10, plus authorised access to the SDK Go module.
-Never put access tokens in this repository. SDK/App/templates are pinned to published 0.32.0 and CLI to 0.34.0; source overrides are not used for release builds.
+Never put access tokens in this repository. SDK/App are pinned to published 0.38.2, templates to 0.35.5 and CLI to 0.41.9; source overrides are not used for release builds.
 
 ```sh
 cd synology
@@ -116,6 +118,21 @@ node_modules/.bin/synopkgland inspect dist/*.spk --json
 ```
 
 Read [the license inventory](NOTICE.md) and [CI policy](docs/ci.md).
+
+## App-open smoke
+
+`npm run e2e:smoke` runs the CLI's `appOpenSmoke` against an authorized NAS
+with the ready marker `#continue-on-this-device`. hass-oidc-auth renders it only
+after DSM admission and a successful OIDC callback; one click on it then opens
+the Home Assistant UI, which the helper cannot perform. It covers a DSM administrator (A), a real
+non-administrator (N, which must see the SDK access-denied page because the App
+is `entry: admin-only`) and a signed-out browser (X). Install Chromium once with
+`npx @e2e-dev/web install chromium`, then set `DSM_E2E_URL` (the DSM HTTPS URL),
+`DSM_E2E_ACCOUNT_ADMIN` and `DSM_E2E_ACCOUNT_NORMAL` (mode 600 account JSON files
+outside this repository), `DSM_E2E_PROFILE_DIR` and `DSM_E2E_OUTPUT_DIR` (under
+the ignored `.e2e/`). The CLI accepts self-signed DSM and gateway certificates.
+The smoke never installs packages or changes accounts; never widen the entry to
+make N reach the App.
 
 ## Upstream maintenance
 
