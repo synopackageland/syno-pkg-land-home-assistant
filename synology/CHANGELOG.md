@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026.10.2-0011: Fresh-install Repairs
+
+- Save native country, time zone and unit suggestions during first onboarding;
+  request manual setup if location detection is unavailable.
+- Remove temporary HTTP YAML before the serving restart and retain the native
+  loopback listener and trusted-proxy configuration.
+- Add bootstrap regression checks; DSM acceptance remains a release gate.
+
 
 ## 2026.10.2-0009: SDK entry-gate migration
 

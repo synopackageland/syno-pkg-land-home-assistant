@@ -26,9 +26,24 @@ def assert_private_http(final=False):
     if not http_store.exists():return
     d=json.loads(http_store.read_text())['data']
     active=d.get('pending') if d.get('pending') and not d['pending'].get('error') else d.get('stable')
-    if not active or active.get('server_host')!=['127.0.0.1'] or active.get('server_port') not in ([8123] if final else [8123,8124]):
+    if not active or active.get('server_host')!=['127.0.0.1'] or active.get('server_port') not in ([8123] if final else [8123,8124]) or active.get('use_x_forwarded_for') is not True or active.get('trusted_proxies')!=['127.0.0.1/32']:
         raise RuntimeError('Stored HTTP policy is incompatible')
 assert_private_http(final=marker.exists())
+def remove_http_yaml(path):
+    doc=json.loads(path.read_text())
+    doc.pop('http',None)
+    path.write_text(json.dumps(doc,indent=2)+'\n')
+async def configure_core_defaults(ws_call):
+    try:
+        detected=await ws_call(8124,'config/core/detect')
+    except TimeoutError:
+        detected={'success':False}
+    settings={key:value for key,value in (detected.get('result') or {}).items()
+              if key in ('country','time_zone','unit_system','currency','latitude','longitude')}
+    if not detected['success'] or not settings.get('country'):
+        print('Home Assistant: location detection unavailable; set country, time zone and units in Settings > System > General',flush=True)
+    elif not (await ws_call(8124,'config/core/update',**settings))['success']:
+        raise RuntimeError('Core configuration failed')
 if marker.exists():
     conf=cfg/'configuration.yaml'
     doc=json.loads(conf.read_text())
@@ -38,7 +53,7 @@ conf=cfg/'configuration.yaml'
 if not conf.exists():
     for key in ['OIDC_SECRET','BOOTSTRAP_PASSWORD']:
         if len(os.environ.get(key,''))!=64 or any(c not in '0123456789abcdef' for c in os.environ[key]):raise SystemExit('Invalid runtime secret')
-    doc={'zeroconf':None,'frontend':None,'config':None,'history':None,'logbook':None,'person':None,'sun':None,'mobile_app':None,'analytics':None,'my':None,'lovelace':{'mode':'storage'},'automation':[], 'script':{},'scene':[],'homeassistant':{'time_zone':'UTC'},
+    doc={'zeroconf':None,'frontend':None,'config':None,'history':None,'logbook':None,'person':None,'sun':None,'mobile_app':None,'analytics':None,'my':None,'lovelace':{'mode':'storage'},'automation':[], 'script':{},'scene':[],
          'http':{'server_host':['127.0.0.1'],'server_port':8124,'use_x_forwarded_for':True,'trusted_proxies':['127.0.0.1']},
          'auth_oidc':{'client_id':'homeassistant','client_secret':os.environ['OIDC_SECRET'],
                       'discovery_url':'http://127.0.0.1:8126/.well-known/openid-configuration','display_name':'DSM',
@@ -86,9 +101,6 @@ async def main():
         else:
             tokens=await api(8124,'/auth/token',form={'grant_type':'refresh_token','refresh_token':json.loads(tokenfile.read_text())['refresh_token'],'client_id':client})
         token=tokens['access_token']
-        for step in ['core_config','analytics','integration']:
-            if any(x['step']==step and x['done'] for x in steps):continue
-            await api(8124,'/api/onboarding/'+step,body={'client_id':client,'redirect_uri':client} if step=='integration' else {},token=token)
         async def ws_call(port,typ,**args):
             async with session.ws_connect(f'http://127.0.0.1:{port}/api/websocket',timeout=remaining()) as ws:
                 await ws.receive_json(timeout=remaining());await ws.send_json({'type':'auth','access_token':token})
@@ -97,6 +109,12 @@ async def main():
                 while True:
                     r=await ws.receive_json(timeout=remaining())
                     if r.get('id')==1:return r
+        if not any(x['step']=='core_config' and x['done'] for x in steps):
+            phase='detect-core-settings'
+            await configure_core_defaults(ws_call)
+        for step in ['core_config','analytics','integration']:
+            if any(x['step']==step and x['done'] for x in steps):continue
+            await api(8124,'/api/onboarding/'+step,body={'client_id':client,'redirect_uri':client} if step=='integration' else {},token=token)
         phase='confirm-private-bootstrap-http'
         if not (await ws_call(8124,'http/config/promote'))['success']:raise RuntimeError('HTTP promote failed')
         phase='configure-final-http'
@@ -108,7 +126,8 @@ async def main():
             await asyncio.sleep(.25)
         phase='native-restart'
         while child.poll() is None:remaining();await asyncio.sleep(.1)
-        assert_private_http();launch()
+        # The promoted native store owns HTTP settings after the first boot.
+        assert_private_http();remove_http_yaml(conf);launch()
         # Refresh tokens survive a native HA restart; never expose them in logs/argv.
         while True:
             remaining()
