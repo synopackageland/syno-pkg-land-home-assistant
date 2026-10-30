@@ -3,6 +3,10 @@ import asyncio, base64, hashlib, io, json, os, pathlib, signal, subprocess, sys,
 cfg = pathlib.Path('/var/tmp/home-assistant/config')
 if os.getuid() == 0 or os.environ.get('HA_BIND') != '127.0.0.1':
     raise SystemExit('Home Assistant requires package UID and SDK loopback listener')
+oidc_port=os.environ.get('OIDC_PORT','')
+if not oidc_port.isdigit() or str(int(oidc_port))!=oidc_port or not 1024<=int(oidc_port)<=65535:
+    raise SystemExit('Invalid OIDC issuer port')
+discovery_url=f'http://127.0.0.1:{oidc_port}/.well-known/openid-configuration'
 # The native HTTP trial reverts after five minutes; fail before that boundary.
 deadline = time.monotonic() + min(240, int(os.environ['SYNOPKGLAND_STARTUP_BUDGET_SECONDS']))
 component = cfg / 'custom_components' / 'auth_oidc'
@@ -33,6 +37,13 @@ def remove_http_yaml(path):
     doc=json.loads(path.read_text())
     doc.pop('http',None)
     path.write_text(json.dumps(doc,indent=2)+'\n')
+def sync_discovery_url(path):
+    # A reinstall that keeps data may select another issuer port.
+    doc=json.loads(path.read_text())
+    oidc=doc.get('auth_oidc')
+    if oidc and oidc.get('discovery_url')!=discovery_url:
+        oidc['discovery_url']=discovery_url
+        path.write_text(json.dumps(doc,indent=2)+'\n')
 async def configure_core_defaults(ws_call):
     try:
         detected=await ws_call(8124,'config/core/detect')
@@ -46,7 +57,7 @@ async def configure_core_defaults(ws_call):
         raise RuntimeError('Core configuration failed')
 if marker.exists():
     conf=cfg/'configuration.yaml'
-    doc=json.loads(conf.read_text())
+    sync_discovery_url(conf)
     print('Home Assistant: retained native configuration ready',flush=True)
     os.execvp('python3',['python3','-m','homeassistant','--config',str(cfg)])
 conf=cfg/'configuration.yaml'
@@ -56,7 +67,7 @@ if not conf.exists():
     doc={'zeroconf':None,'frontend':None,'config':None,'history':None,'logbook':None,'person':None,'sun':None,'mobile_app':None,'analytics':None,'my':None,'lovelace':{'mode':'storage'},'automation':[], 'script':{},'scene':[],
          'http':{'server_host':['127.0.0.1'],'server_port':8124,'use_x_forwarded_for':True,'trusted_proxies':['127.0.0.1']},
          'auth_oidc':{'client_id':'homeassistant','client_secret':os.environ['OIDC_SECRET'],
-                      'discovery_url':'http://127.0.0.1:8126/.well-known/openid-configuration','display_name':'DSM',
+                      'discovery_url':discovery_url,'display_name':'DSM',
                       'roles':{'admin':'admins','user':'users'},'features':{'default_redirect':True,'force_https':True,'automatic_user_linking':False}}}
     conf.write_text(json.dumps(doc,indent=2)+'\n');conf.chmod(0o600)
 child=None;phase='start'
