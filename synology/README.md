@@ -2,10 +2,10 @@
 
 ## Current package
 
-Version **2026.10.4-0002** uses published SDK/App **0.38.2**, templates
-**0.35.5**, CLI **0.41.9** and executor **v0.38.2**. Protected executors require
-administrator approval after upgrading. Device and mobile-client acceptance
-are separate from the offline package gates.
+Version **2026.10.4-0003** uses published SDK/App **0.42.0**, templates
+**0.37.0**, CLI **0.42.2** and executor **v0.39.0**. Protected executors require
+administrator approval when approval retention cannot be verified. Device and
+mobile-client acceptance are separate from the offline package gates.
 
 ## Mobile and native clients
 
@@ -30,7 +30,7 @@ them. Browser UI and interactive OIDC entry remain DSM-gated. `/auth/providers`
 and `/auth/login_flow` are not exceptions. Companion first-login/onboarding and
 end-to-end native-client operation remain unverified.
 
-Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0002.
+Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0003.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging
 lives in this directory. The official Docker Hub image is pinned by version and its multi-platform index SHA-256. The x86_64 manifest matches the official GHCR image byte for byte.
@@ -50,8 +50,11 @@ lives in this directory. The official Docker Hub image is pinned by version and 
 
 ## DSM sign-in
 
-Open **Home Assistant** from DSM's main menu. The SDK handles DSM sign-in and
-OIDC; no separate App password or external identity server is required. Open the
+Open **Home Assistant** from DSM's main menu. The generated entry is
+`/webman/3rdparty/SynoPkgHomeAssistant/sso/open.cgi`, which opens the gateway's
+dedicated origin. Compose does not support the native daemon ingress path
+`/synopkgland/SynoPkgHomeAssistant/` or upstream subpath hosting. The SDK handles
+DSM sign-in and OIDC; no separate App password or external identity server is required. Open the
 same install by its IP address or a trusted DNS alias. Each origin has separate
 host-only cookies and requires its own DSM session. Use trusted DNS and TLS.
 
@@ -93,7 +96,9 @@ the selected ports; reinstall to change them.
 
 Configuration, dashboards, automations and the database live in the package's
 named volume and survive stop/start. Export backups before removal or replacing
-the package; this release does not certify an upgrade from an older package.
+the package. One existing installation passed an in-place upgrade from
+2026.10.4-0002 to 2026.10.4-0003 with core settings preserved; upgrades from other
+versions and complete data-retention behavior remain unverified.
 Container Manager named volumes remain after **both** uninstall choices, including
 the wizard option to delete package data. That option does not delete the named
 volume containing Home Assistant configuration and its database. Back up first;
@@ -105,7 +110,7 @@ user's NAS filesystem permissions. This release enables no ctl/AI-control endpoi
 ## Build and review
 
 Use Node 22.12+ and Go 1.26.10, plus authorised access to the SDK Go module.
-Never put access tokens in this repository. SDK/App are pinned to published 0.38.2, templates to 0.35.5 and CLI to 0.41.9; source overrides are not used for release builds.
+Never put access tokens in this repository. SDK/App are pinned to published 0.42.0, templates to 0.37.0 and CLI to 0.42.2; source overrides are not used for release builds.
 
 ```sh
 cd synology
