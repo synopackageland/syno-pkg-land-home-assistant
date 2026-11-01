@@ -1,5 +1,21 @@
 # Release notes
 
+## 2026.10.4-0003
+
+Built with published SDK/App 0.42.0, templates 0.37.0, CLI 0.42.2 and executor
+v0.39.0. Home Assistant 2026.10.4 and its official image are unchanged. The DSM
+entry remains `/webman/3rdparty/SynoPkgHomeAssistant/sso/open.cgi`, opening the
+gateway on its dedicated origin. Native daemon ingress at
+`/synopkgland/SynoPkgHomeAssistant/` is unsupported for this Compose package;
+administrator-only entry and native-client authentication policy are unchanged.
+
+Approval retention is unknown. The current CLI rejects the previous published
+SPK as an invalid baseline (`COMPOSE_ARTIFACT_INVALID`); administrator approval
+may be required after upgrading. One existing installation passed an in-place
+upgrade from 2026.10.4-0002: running, administrator DSM launch and core settings
+retention were verified. The native daemon ingress URL returned HTTP 404.
+Full E2E and broader lifecycle/device acceptance were not run.
+
 ## 2026.10.4-0002
 
 Built with published SDK/App 0.38.2, templates 0.35.5, CLI 0.41.9 and executor

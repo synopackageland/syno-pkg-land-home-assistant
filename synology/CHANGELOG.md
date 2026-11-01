@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026.10.4-0003: CLI 0.42.2 rebuild
+
+Built with SDK/App 0.42.0, templates 0.37.0, CLI 0.42.2 and executor v0.39.0;
+Home Assistant 2026.10.4, the official image and the administrator-only policy
+are unchanged. The generated DSM launcher retains its Compose gateway entry;
+the native daemon ingress path does not apply to this Compose package.
+
+Approval retention is unknown: the previous released SPK is not a valid
+baseline for this CLI. Administrator approval may be required after upgrading.
+
 ## 2026.10.4-0002: SDK 0.38.2 rebuild
 
 Built with SDK/App 0.38.2, templates 0.35.5, CLI 0.41.9 and executor v0.38.2;

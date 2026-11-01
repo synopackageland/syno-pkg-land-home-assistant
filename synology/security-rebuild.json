@@ -1,17 +1,17 @@
 {
   "package": "SynoPkgHomeAssistant",
-  "version": "2026.10.2-0006",
+  "version": "2026.10.4-0003",
   "toolchain": {
-    "cli": "0.30.0",
-    "templates": "0.30.0",
-    "sdk": "0.30.2",
+    "cli": "0.42.2",
+    "templates": "0.37.0",
+    "sdk": "0.42.0",
     "sourceOverrides": false,
-    "imageVersion": "2026.10.2",
+    "imageVersion": "2026.10.4",
     "customComponentVersion": "1.2.1",
     "network": "host",
     "package": "SynoPkgHomeAssistant",
-    "app": "0.30.2",
-    "executorTag": "executor/v0.27.0",
+    "app": "0.42.0",
+    "executorTag": "executor/v0.39.0",
     "goToolchain": "go1.26.10"
   },
   "check": {
@@ -24,18 +24,18 @@
     "ok": true,
     "findings": []
   },
-  "nas_tested": false,
-  "embedded_compose_sdk": "0.30.2",
-  "manifest_sha256": "e394595ab066d0efcb9f2e42f04c3501ef53714fa399e8793a8c516f2b82953b",
+  "nas_tested": true,
+  "embedded_compose_sdk": "0.42.0",
+  "manifest_sha256": "8c0f1db62897bcba70ee2f19025ca04f3fb52a445e73be2e4f867b73d54c661c",
   "lock_sha256": {
-    "package-lock.json": "aa48b673fe776787bd347dc4fc1da169f79ab2986127a45f45059099578c63c2"
+    "package-lock.json": "cbb8e8bf5cf7a8f0c9ec05f7280a3da65a026b09391716f833f20624e22bc478"
   },
   "outputs": [
     {
-      "file": "SynoPkgHomeAssistant-2026.10.2-0006-x86_64.spk",
-      "sha256": "69887b01eb7bdbe1040569817ca7b04c3486cec1b63498a3c3921455c80b5d12",
-      "size": 26806784,
-      "md5": "b8b022f8cd5ec36a015759d07fca2626"
+      "file": "SynoPkgHomeAssistant-2026.10.4-0003-x86_64.spk",
+      "sha256": "5a7ab739f69ceb5b35385bc746f03841c996ba328e7ef30eb688bd48fc8c49fe",
+      "size": 28462592,
+      "md5": "be614bf1b5be365008a2344119f24991"
     }
   ],
   "go_binaries": [
@@ -43,50 +43,73 @@
       "arch": "x86_64",
       "path": "compose/control",
       "version": "go1.26.10",
-      "sha256": "5bea4711d0564c97e8a669077112c122e1f9c7c27d109e8cb0feb67d81abd70a",
+      "sha256": "f6be3571c50293b286d82431db71e08598f3d08551879f29b1b63ea1d5283b16",
       "upstream_unmodified": false
     },
     {
       "arch": "x86_64",
       "path": "compose/storage-init",
       "version": "go1.26.10",
-      "sha256": "a8611d079df326de4e8a9f7574d6d1c78f087afd49e37f899f811d7a0c5c570c",
+      "sha256": "fba2fd79c7551d07615869c23ca1076180b0b723f15f3f856fa75b750657e86e",
       "upstream_unmodified": false
     },
     {
       "arch": "x86_64",
       "path": "daemon/control",
       "version": "go1.26.10",
-      "sha256": "4bed54373273fd30d2aaf3a643960c35a45c577283ed133fa97fc842c5e1dc9e",
+      "sha256": "a4c8aa677795ff93641efecb7b0699d02c17c06ff9bfbec4943d8fe136a3b753",
       "upstream_unmodified": false
     },
     {
       "arch": "x86_64",
       "path": "daemon/payload/_sso/gateway",
       "version": "go1.26.10",
-      "sha256": "7c04de7a1ead44c4e98c14a5550f7ad8982635fa44962a007703460c108ffea3",
+      "sha256": "6c6a6644a5aa20b689030c49c0b0dbd47abf1082d0fe3ef3554da5f3386749c2",
+      "upstream_unmodified": false
+    },
+    {
+      "arch": "x86_64",
+      "path": "install/control",
+      "version": "go1.26.10",
+      "sha256": "213dd6c7fb303e45cf771f1935d64b0e9d3518fa5d00709296764bd695a707f4",
       "upstream_unmodified": false
     },
     {
       "arch": "x86_64",
       "path": "ui/sso/authorize.cgi",
       "version": "go1.26.10",
-      "sha256": "7c04de7a1ead44c4e98c14a5550f7ad8982635fa44962a007703460c108ffea3",
+      "sha256": "6c6a6644a5aa20b689030c49c0b0dbd47abf1082d0fe3ef3554da5f3386749c2",
       "upstream_unmodified": false
     },
     {
       "arch": "x86_64",
       "path": "ui/sso/open.cgi",
       "version": "go1.26.10",
-      "sha256": "7c04de7a1ead44c4e98c14a5550f7ad8982635fa44962a007703460c108ffea3",
+      "sha256": "6c6a6644a5aa20b689030c49c0b0dbd47abf1082d0fe3ef3554da5f3386749c2",
       "upstream_unmodified": false
     },
     {
       "arch": "x86_64",
       "path": "ui/sso/settings.cgi",
       "version": "go1.26.10",
-      "sha256": "7c04de7a1ead44c4e98c14a5550f7ad8982635fa44962a007703460c108ffea3",
+      "sha256": "6c6a6644a5aa20b689030c49c0b0dbd47abf1082d0fe3ef3554da5f3386749c2",
       "upstream_unmodified": false
     }
-  ]
+  ],
+  "approval": {
+    "retention": "unknown",
+    "baseline_version": "2026.10.2-0008",
+    "baseline_error": "APPROVAL_BASELINE_INVALID: COMPOSE_ARTIFACT_INVALID unexpected scripts/preinst"
+  },
+  "nas_acceptance": {
+    "operation": "in-place upgrade",
+    "from": "2026.10.4-0002",
+    "to": "2026.10.4-0003",
+    "status": "running",
+    "administrator_dsm_launch": true,
+    "core_settings_preserved": true,
+    "fixed_ingress_status": 404,
+    "fixed_ingress_supported": false,
+    "full_e2e": false
+  }
 }
