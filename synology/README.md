@@ -2,8 +2,8 @@
 
 ## Current package
 
-Version **2026.10.4-0003** uses published SDK/App **0.42.0**, templates
-**0.37.0**, CLI **0.42.2** and executor **v0.39.0**. Protected executors require
+Version **2026.10.4-0004** uses published SDK/App **0.42.0**, templates
+**0.37.0**, CLI **0.47.4** and executor **v0.39.0**. Protected executors require
 administrator approval when approval retention cannot be verified. Device and
 mobile-client acceptance are separate from the offline package gates.
 
