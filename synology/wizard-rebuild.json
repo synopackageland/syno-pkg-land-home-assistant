@@ -1,0 +1,56 @@
+{
+  "package": "SynoPkgHomeAssistant",
+  "version": "2026.10.4-0004",
+  "toolchain": {
+    "cli": "0.47.4",
+    "templates": "0.37.0",
+    "sdk": "0.42.0",
+    "sourceOverrides": false,
+    "imageVersion": "2026.10.4",
+    "customComponentVersion": "1.2.1",
+    "network": "host",
+    "package": "SynoPkgHomeAssistant",
+    "app": "0.42.0",
+    "executorTag": "executor/v0.39.0",
+    "goToolchain": "go1.26.10"
+  },
+  "check": {
+    "ok": true
+  },
+  "build": {
+    "ok": true
+  },
+  "inspect": {
+    "ok": true,
+    "findings": [],
+    "dsm": {
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        {
+          "code": "SPK_INFO_FIELD_UNKNOWN",
+          "severity": "warning",
+          "path": "INFO",
+          "message": "INFO startstop_restart_services is not a field the guide lists; DSM does not use it."
+        },
+        {
+          "code": "SPK_INFO_FIELD_UNKNOWN",
+          "severity": "warning",
+          "path": "INFO",
+          "message": "INFO instuninst_restart_services is not a field the guide lists; DSM does not use it."
+        }
+      ]
+    }
+  },
+  "tests_run": false,
+  "nas_tested": false,
+  "live_checks_run": false,
+  "approval_retention": "unknown",
+  "output": {
+    "file": "SynoPkgHomeAssistant-2026.10.4-0004-x86_64.spk",
+    "sha256": "6c77b4a2bf5d055577227a5e669a9514f84d16dff1ed8e888f59f3a9e962c9ab",
+    "size": 28540928
+  },
+  "manifest_sha256": "29e3b97fa0cbfe8834c33eb3cc36242e837d7e06abec9fd8771c971ec2acd9b3",
+  "package_lock_sha256": "ab42e718e79e33af5b3bc3f07c1a913acb33b49b488fb4629570eaec36af270e"
+}
