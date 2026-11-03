@@ -1,7 +1,7 @@
 schema: 2
 package: SynoPkgHomeAssistant
 version: 2026.10.4
-build: 4
+build: 5
 displayname: Home Assistant
 icon: assets/icon.png
 description: Connect smart home devices and automate everyday routines
@@ -17,7 +17,7 @@ capabilities: {}
 install:
   ports: true
 compose:
-  sdk: 0.42.0
+  sdk: 0.49.3
   files: [compose.yaml, compose.image.yaml]
   host_udp: [{port: 5353, purpose: mdns}]
   services:
@@ -35,7 +35,7 @@ compose:
   network: {egress: internet}
 identity_gateway:
   upstream_auth_paths: [/api, /auth/token, /auth/revoke]
-  sdk: 0.42.0
+  sdk: 0.49.3
   mode: oidc
   access: dsm-admins
   listen: {https: 8125}
