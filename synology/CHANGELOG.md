@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026.10.4-0006: DSM HTTP sign-in fix
+
+- en-US: Fix DSM sign-in when opened over HTTP
+- zh-TW: 修正以 HTTP 開啟時的 DSM 登入
+- zh-CN: 修复以 HTTP 打开时的 DSM 登录
+- ja-JP: HTTP 経由で開いた際の DSM ログインを修正
+- ko-KR: HTTP로 열 때 DSM 로그인 문제 수정
+- de-DE: DSM-Anmeldung beim Öffnen über HTTP korrigiert
+- fr-FR: Correction de la connexion DSM lors de l’ouverture en HTTP
+
+Built with SDK/App 0.50.7, CLI 0.48.13 and templates 0.40.1.
+
 ## 2026.10.4-0004: Install wizard fixes
 
 - en-US: Install wizard: port conflicts only warn; shared folder selection fixed

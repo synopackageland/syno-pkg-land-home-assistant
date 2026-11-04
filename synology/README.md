@@ -2,10 +2,10 @@
 
 ## Current package
 
-Version **2026.10.4-0004** uses published SDK/App **0.42.0**, templates
-**0.37.0**, CLI **0.47.4** and executor **v0.39.0**. Protected executors require
-administrator approval when approval retention cannot be verified. Device and
-mobile-client acceptance are separate from the offline package gates.
+Version **2026.10.4-0006** uses published SDK/App **0.50.7**, templates
+**0.40.1**, CLI **0.48.13** and executor **v0.49.5**. This rebuild fixes DSM
+sign-in when opening from HTTP. Administrator approval retention is unknown
+without a matching baseline SPK. Device acceptance is separate from package checks.
 
 ## Mobile and native clients
 
@@ -30,7 +30,7 @@ them. Browser UI and interactive OIDC entry remain DSM-gated. `/auth/providers`
 and `/auth/login_flow` are not exceptions. Companion first-login/onboarding and
 end-to-end native-client operation remain unverified.
 
-Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0003.
+Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0006.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging
 lives in this directory. The official Docker Hub image is pinned by version and its multi-platform index SHA-256. The x86_64 manifest matches the official GHCR image byte for byte.
@@ -110,7 +110,7 @@ user's NAS filesystem permissions. This release enables no ctl/AI-control endpoi
 ## Build and review
 
 Use Node 22.12+ and Go 1.26.10, plus authorised access to the SDK Go module.
-Never put access tokens in this repository. SDK/App are pinned to published 0.42.0, templates to 0.37.0 and CLI to 0.42.2; source overrides are not used for release builds.
+Never put access tokens in this repository. SDK/App are pinned to published 0.50.7, templates to 0.40.1 and CLI to 0.48.13; source overrides are not used for release builds.
 
 ```sh
 cd synology
