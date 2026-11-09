@@ -2,10 +2,12 @@
 
 ## Current package
 
-Version **2026.10.4-0006** uses published SDK/App **0.50.7**, templates
-**0.40.1**, CLI **0.48.13** and executor **v0.49.5**. This rebuild fixes DSM
-sign-in when opening from HTTP. Administrator approval retention is unknown
-without a matching baseline SPK. Device acceptance is separate from package checks.
+Version **2026.10.4-0007** uses published SDK/App **0.53.21**, templates
+**0.40.1** and CLI **0.52.13**. This rebuild improves page loading reliability
+when signing in by sharing session admission and queuing parallel asset requests.
+No SDK administrator approval is required; the package has no executor.
+Validation is limited to check, build, baseline inspect and leak scans; tests and
+device acceptance were not run.
 
 ## Mobile and native clients
 
@@ -30,7 +32,7 @@ them. Browser UI and interactive OIDC entry remain DSM-gated. `/auth/providers`
 and `/auth/login_flow` are not exceptions. Companion first-login/onboarding and
 end-to-end native-client operation remain unverified.
 
-Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0006.
+Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0007.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging
 lives in this directory. The official Docker Hub image is pinned by version and its multi-platform index SHA-256. The x86_64 manifest matches the official GHCR image byte for byte.
@@ -110,7 +112,7 @@ user's NAS filesystem permissions. This release enables no ctl/AI-control endpoi
 ## Build and review
 
 Use Node 22.12+ and Go 1.26.10, plus authorised access to the SDK Go module.
-Never put access tokens in this repository. SDK/App are pinned to published 0.50.7, templates to 0.40.1 and CLI to 0.48.13; source overrides are not used for release builds.
+Never put access tokens in this repository. SDK/App are pinned to published 0.53.21, templates to 0.40.1 and CLI to 0.52.13; source overrides are not used for release builds.
 
 ```sh
 cd synology
