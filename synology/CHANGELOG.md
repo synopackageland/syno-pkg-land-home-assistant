@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026.10.4-0008: Temporary files on disk
+
+Temporary files move from an unbounded memory tmpfs on `/tmp` to SDK disk scratch
+(`compose.services.web.scratch: [/tmp]`, with `TMPDIR=/tmp`): a package-UID-owned
+mode-0700 directory on the package volume, emptied at every container start. No
+memory tmpfs remains. Rebuilt with published SDK/App 0.53.25 (executor 0.53.6) and
+CLI 0.52.16. The upstream version, official image and authentication policy are
+unchanged. No SDK administrator approval is required; this package has no executor.
+
+Validation: unit and entry tests, render check, check, build, inspect comparison
+with 2026.10.4-0007 and leak scans. Device: upgraded from 2026.10.4-0007 on an x86_64
+DSM 7.3 NAS; the container started, `/tmp` was a btrfs bind (not tmpfs) with mode
+0700 owned by the package UID, writable, and the main page loaded through DSM sign-in.
+
 ## 2026.10.4-0007: Sign-in page loading reliability
 
 Improve page loading reliability when signing in with SDK/App 0.53.21 and

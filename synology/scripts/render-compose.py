@@ -20,9 +20,9 @@ def render():
     compose = {'services': {'web': {
         'image': IMAGE,
         'entrypoint': ['python3', '-c'], 'command': [bootstrap],
-        'environment': {'TZ': 'UTC', 'PYTHONDONTWRITEBYTECODE': '1'},
+        'environment': {'TZ': 'UTC', 'PYTHONDONTWRITEBYTECODE': '1', 'TMPDIR': '/tmp'},
         'read_only': True, 'volumes': ['data:/var/tmp'],
-        'tmpfs': ['/tmp:mode=1777'], 'restart': 'unless-stopped',
+        'restart': 'unless-stopped',
         'stop_grace_period': '60s',
     }}, 'volumes': {'data': {}}}
     return json.dumps(compose, indent=2) + '\n'
