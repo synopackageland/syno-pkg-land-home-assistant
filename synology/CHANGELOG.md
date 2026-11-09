@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026.10.4-0007: Sign-in page loading reliability
+
+Improve page loading reliability when signing in with SDK/App 0.53.21 and
+CLI 0.52.13. Session admission is shared and parallel asset requests queue.
+The upstream version, official image and authentication policy are unchanged.
+Check, build, baseline inspect and leak scans only; tests and NAS checks were not run.
+No SDK administrator approval is required; this package has no executor.
+
 ## 2026.10.4-0006: DSM HTTP sign-in fix
 
 - en-US: Fix DSM sign-in when opened over HTTP
