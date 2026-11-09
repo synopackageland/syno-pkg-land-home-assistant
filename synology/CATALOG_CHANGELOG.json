@@ -1,11 +1,11 @@
 {
-  "en": "Improve page loading reliability when signing in",
-  "zh-TW": "改善登入時的頁面載入穩定性",
-  "zh-CN": "改善登录时的页面加载稳定性",
-  "ja": "ログイン時のページ読み込みの安定性を改善",
-  "ko": "로그인 시 페이지 로딩 안정성 개선",
-  "de": "Zuverlässigkeit beim Laden der Seite während der Anmeldung verbessern",
-  "fr": "Améliorer la fiabilité du chargement des pages lors de la connexion",
-  "es": "Mejorar la fiabilidad de carga de las páginas al iniciar sesión",
-  "it": "Migliorare l’affidabilità del caricamento delle pagine durante l’accesso"
+  "en": "Store temporary files on disk instead of memory",
+  "zh-TW": "暫存檔改存於磁碟而非記憶體",
+  "zh-CN": "临时文件改存于磁盘而非内存",
+  "ja": "一時ファイルをメモリではなくディスクに保存",
+  "ko": "임시 파일을 메모리 대신 디스크에 저장",
+  "de": "Temporäre Dateien auf der Festplatte statt im Arbeitsspeicher speichern",
+  "fr": "Stocker les fichiers temporaires sur le disque plutôt qu’en mémoire",
+  "es": "Guardar los archivos temporales en el disco en lugar de en la memoria",
+  "it": "Salvare i file temporanei su disco invece che in memoria"
 }
