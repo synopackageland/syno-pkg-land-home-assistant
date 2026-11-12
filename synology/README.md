@@ -2,15 +2,13 @@
 
 ## Current package
 
-Version **2026.10.4-0008** uses published SDK/App **0.53.25**, templates
-**0.40.1** and CLI **0.52.16**. Temporary files move from an unbounded memory tmpfs on `/tmp` to SDK disk scratch
-(`compose.services.web.scratch: [/tmp]`, with `TMPDIR=/tmp`): a package-UID-owned
-mode-0700 directory on the package volume, emptied at every container start. No
-memory tmpfs remains.
-Validation: unit and entry tests, render check, check, build, inspect comparison
-with 2026.10.4-0007 and leak scans. Device: upgraded from 2026.10.4-0007 on an x86_64
-DSM 7.3 NAS; the container started, `/tmp` was a btrfs bind (not tmpfs) with mode
-0700 owned by the package UID, writable, and the main page loaded through DSM sign-in.
+Version **2026.10.4-0009** uses published SDK/App **0.53.25**, templates
+**0.40.1** and CLI **0.53.16**. It improves installation reliability in Package
+Center: the ingress nginx reload is declared only for start and stop, not for
+install or uninstall. Temporary files stay on SDK disk scratch
+(`compose.services.web.scratch: [/tmp]`, with `TMPDIR=/tmp`), as in 2026.10.4-0008.
+Validation: check, build, inspect comparison with 2026.10.4-0008 and leak scans;
+tests and NAS checks were not run for this rebuild.
 
 ## Mobile and native clients
 
@@ -35,7 +33,7 @@ them. Browser UI and interactive OIDC entry remain DSM-gated. `/auth/providers`
 and `/auth/login_flow` are not exceptions. Companion first-login/onboarding and
 end-to-end native-client operation remain unverified.
 
-Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0008.
+Home Assistant 2026.10.4, packaged as `SynoPkgHomeAssistant` 2026.10.4-0009.
 This is a community package, not an official Home Assistant or Synology product.
 Upstream source and the official container image remain unchanged. All packaging
 lives in this directory. The official Docker Hub image is pinned by version and its multi-platform index SHA-256. The x86_64 manifest matches the official GHCR image byte for byte.
@@ -115,7 +113,7 @@ user's NAS filesystem permissions. This release enables no ctl/AI-control endpoi
 ## Build and review
 
 Use Node 22.12+ and Go 1.26.10, plus authorised access to the SDK Go module.
-Never put access tokens in this repository. SDK/App are pinned to published 0.53.25, templates to 0.40.1 and CLI to 0.52.16; source overrides are not used for release builds.
+Never put access tokens in this repository. SDK/App are pinned to published 0.53.25, templates to 0.40.1 and CLI to 0.53.16; source overrides are not used for release builds.
 
 ```sh
 cd synology

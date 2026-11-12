@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026.10.4-0009: Installation reliability in Package Center
+
+Rebuilt with CLI 0.53.16 to improve installation reliability in Package Center.
+The ingress nginx reload is now declared only for start and stop
+(`startstop_restart_services="nginx.service"`); INFO no longer declares
+`instuninst_restart_services`, so installing no longer reloads nginx while DSM
+is loading package information. SDK/App 0.53.25, templates 0.40.1, the upstream
+version, official image and authentication policy are unchanged.
+
+Validation: check, build, inspect comparison with 2026.10.4-0008 and leak scans.
+Tests and NAS checks were not run for this rebuild.
+
 ## 2026.10.4-0008: Temporary files on disk
 
 Temporary files move from an unbounded memory tmpfs on `/tmp` to SDK disk scratch
