@@ -1,7 +1,7 @@
 {
-  "tag": "2026.10.4",
-  "commit": "357cae5c598dfcd7a0ea7dc5b1facccd4ec6037b",
-  "version": "2026.10.4",
-  "build": 9,
+  "tag": "2026.11.2",
+  "commit": "ff5d56b825a0fb66b03d01bc297d49e206cdaba3",
+  "version": "2026.11.2",
+  "build": 1,
   "repository": "https://github.com/home-assistant/core"
 }

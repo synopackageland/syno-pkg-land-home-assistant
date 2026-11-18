@@ -1,5 +1,17 @@
 # Release notes
 
+## 2026.11.2-0001: Home Assistant 2026.11.2
+
+Upgrades the official Home Assistant image from 2026.10.4 to 2026.11.2 (pinned by
+multi-platform index digest) and merges the matching upstream source tag
+unchanged. Home Assistant 2026.11 adds 38 new integrations; 2026.11.1 and
+2026.11.2 bring integration and device fixes. CLI 0.53.16, SDK/App 0.53.25,
+templates 0.40.1, the bundled OIDC component and the administrator-only policy
+are unchanged.
+
+Validation: package unit tests, render check, check, build and inspect, plus
+leak scans. Browser, container-runtime and NAS checks were not run for this upgrade.
+
 ## 2026.10.4-0009: Installation reliability in Package Center
 
 Rebuilt with CLI 0.53.16 to improve installation reliability in Package Center.

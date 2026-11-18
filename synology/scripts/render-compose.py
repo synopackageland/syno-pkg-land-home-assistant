@@ -8,7 +8,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 COMPONENT_SHA256 = 'e5badaaacaa63cfd6fe733924a05e76d75058836190398598fb24de57cd47ccd'
-IMAGE = 'homeassistant/home-assistant:2026.10.4@sha256:23f4dfbb69ce76315dbc4de7915504f1c2dcecd7ca2648113a493a385972e133'
+IMAGE = 'homeassistant/home-assistant:2026.11.2@sha256:493a07e8f6530fc640223f4a0a5248f20a61ca2f718bb1d31efbf08a2c5ea28f'
 
 
 def render():
