@@ -1,11 +1,11 @@
 {
-  "en": "Improve installation reliability in Package Center",
-  "zh-TW": "提升在套件中心安裝的穩定性",
-  "zh-CN": "提升在套件中心安装的稳定性",
-  "ja": "パッケージセンターでのインストールの安定性を向上",
-  "ko": "패키지 센터에서의 설치 안정성 향상",
-  "de": "Zuverlässigkeit der Installation im Paket-Zentrum verbessern",
-  "fr": "Améliorer la fiabilité de l’installation dans le Centre de paquets",
-  "es": "Mejorar la fiabilidad de la instalación en el Centro de paquetes",
-  "it": "Migliorare l’affidabilità dell’installazione nel Centro pacchetti"
+  "en": "Update Home Assistant to 2026.11.2 with 38 new integrations and device fixes",
+  "zh-TW": "Home Assistant 更新至 2026.11.2，新增 38 個整合並修正多項裝置問題",
+  "zh-CN": "Home Assistant 更新至 2026.11.2，新增 38 个集成并修复多项设备问题",
+  "ja": "Home Assistant を 2026.11.2 に更新し、38 個の新しい統合とデバイス修正を追加",
+  "ko": "Home Assistant 2026.11.2로 업데이트하여 38개의 새 통합과 기기 수정 사항 추가",
+  "de": "Home Assistant auf 2026.11.2 aktualisieren mit 38 neuen Integrationen und Gerätekorrekturen",
+  "fr": "Mettre à jour Home Assistant vers 2026.11.2 avec 38 nouvelles intégrations et des correctifs d’appareils",
+  "es": "Actualizar Home Assistant a 2026.11.2 con 38 integraciones nuevas y correcciones de dispositivos",
+  "it": "Aggiornare Home Assistant alla 2026.11.2 con 38 nuove integrazioni e correzioni per i dispositivi"
 }
